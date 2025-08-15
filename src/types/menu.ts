@@ -4,4 +4,5 @@ export type MenuItem = {
     name: string;
     price: number;
     inStock: boolean;
+    category: string
 };
