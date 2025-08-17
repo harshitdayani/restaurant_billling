@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TextField } from "../common/form/TextField";
 import { Button } from "../common/Button";
 import { useCart } from "../../context/CartContext";
-import { mapCartToOrderItems, computeTotals } from "../../utils/Pricing";
+import { mapCartToOrderItems, computeTotals } from "../../utils/pricing";
 import type { OrderPayload, OrderType } from "../../types/order";
 
 export function CheckoutForm() {
