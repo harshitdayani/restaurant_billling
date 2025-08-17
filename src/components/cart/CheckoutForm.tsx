@@ -51,7 +51,7 @@ export function CheckoutForm() {
 
   return (
     <form onSubmit={handleSubmit} className="card space-y-4">
-      <h3 className="text-lg font-semibold">Checkout</h3>
+      <h3 id="checkout-heading" className="text-lg font-semibold">Checkout</h3>
 
       {/* Customer Name */}
       <TextField label="Customer Name" value={name} onChange={setName} placeholder="Enter name" />
