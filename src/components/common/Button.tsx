@@ -5,10 +5,7 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 export function Button({ variant = "outline", className = "", ...rest }: Props) {
-    const base = "inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm disabled:opacity-50";
-    const styles =
-        variant === "solid"
-            ? "bg-gray-900 text-white hover:bg-black"
-            : "border border-gray-200 hover:bg-gray-50";
-    return <button className={`${base} ${styles} ${className}`} {...rest} />;
+    const base = "btn";
+    const kind = variant === "solid" ? "btn-solid" : "btn-outline";
+    return <button className={`${base} ${kind} ${className}`} {...rest} />;
 }

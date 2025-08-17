@@ -8,7 +8,7 @@ export function CategoryFilter({ categories, value, onChange }: Props) {
     const all = ["All", ...categories];
 
     return (
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-2 mb-4 mt-4">
             {all.map((cat) => {
                 const active = value === cat;
                 return (

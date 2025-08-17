@@ -3,6 +3,8 @@ import { MenuItemCard } from "./MenuItemCard";
 import type { MenuItem } from "../../types/menu";
 import { CategoryFilter } from "../common/CategoryFilter";
 import { SearchBox } from "../common/SearchBox";
+import { useDebounce } from "../../hooks/useDebounce";
+import { useCategories } from "../../hooks/useCategories";
 
 /** ---- Sample data (replace with API later) ---- */
 const initialMenu: MenuItem[] = [
@@ -16,23 +18,20 @@ export function MenuList() {
     const [items] = useState(initialMenu);
     const [selected, setSelected] = useState<string>("All");
     const [search, setSearch] = useState<string>("");
+    const debounced = useDebounce(search, 250);
 
-    // unique categories derived from items
-    const categories = useMemo(
-        () => Array.from(new Set(items.map((i) => i.category))).sort(),
-        [items]
-    );
+    // unique categories derived from items, using cutom hook useCategories
+    const categories = useCategories(items);
 
     // filter by selected category
     const filtered = useMemo(() => {
-        let result = selected === "All" ? items : items.filter((i) => i.category === selected);
-        if (search.trim()) {
-            result = result.filter((i) =>
-                i.name.toLowerCase().includes(search.toLowerCase())
-            );
-        }
-        return result;
-    }, [items, selected, search]);
+        const term = debounced.trim().toLowerCase();
+        return items.filter((i) => {
+            const matchCategory = selected === "All" || i.category === selected;
+            const matchSearch = !term ||  i.name.toLowerCase().includes(term);
+            return matchCategory && matchSearch;
+        });
+    }, [items, selected, debounced]);
 
     return (
         <div>

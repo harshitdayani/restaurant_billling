@@ -1,6 +1,7 @@
 import { createContext, useContext, useReducer, type ReactNode } from "react";
 import type { CartItem } from "../types/cart";
 import type { MenuItem } from "../types/menu";
+import { usePersistentReducer } from "../hooks/usePersistentReducer";
 
 type CartAction =
     | { type: "ADD"; item: MenuItem; qty: number }
@@ -38,7 +39,7 @@ const CartContext = createContext<{
 }>({ cart: [], dispatch: () => { } });
 
 export function CartProvider({ children }: { children: ReactNode }) {
-    const [cart, dispatch] = useReducer(cartReducer, []);
+    const [cart, dispatch] = usePersistentReducer(cartReducer, [], 'rbilling:cart');
     return (
         <CartContext.Provider value={{ cart, dispatch }}>
             {children}

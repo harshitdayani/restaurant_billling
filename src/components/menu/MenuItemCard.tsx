@@ -6,17 +6,9 @@ import { CategoryBadge } from "../common/CategoryBadge";
 import { QuantityInput } from "../common/QuantityInput";
 import { useCart } from "../../context/CartContext";
 
-type Props = { item: MenuItem };
-
-export function MenuItemCard({ item }: Props) {
+export function MenuItemCard({ item }: { item: MenuItem }) {
     const { dispatch } = useCart();
     const [qty, setQty] = useState(1);
-
-    const handleAdd = () => {
-        if (!item.inStock) return;
-        dispatch({ type: "ADD", item, qty });
-        setQty(1); // reset after adding
-    };
 
     return (
         <Card
@@ -27,7 +19,7 @@ export function MenuItemCard({ item }: Props) {
                         <CategoryBadge category={item.category} />
                     </span>
                     {!item.inStock && (
-                        <span className="text-[11px] rounded bg-red-50 px-2 py-1 text-red-600 ring-1 ring-red-100">
+                        <span className="text-[11px] rounded bg-red-50 px-2 py-1 text-red-600 ring-1 ring-red-100 dark:bg-red-400/10 dark:text-red-300 dark:ring-red-400/20">
                             Out of stock
                         </span>
                     )}
@@ -39,14 +31,19 @@ export function MenuItemCard({ item }: Props) {
                     <Button
                         disabled={!item.inStock}
                         className="grow"
-                        onClick={handleAdd}
+                        onClick={() => {
+                            if (!item.inStock) return;
+                            dispatch({ type: "ADD", item, qty });
+                            setQty(1);
+                        }}
+                        variant="outline"
                     >
                         Add to cart
                     </Button>
                 </div>
             }
         >
-            <p className="text-sm text-gray-500">₹{item.price}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">₹{item.price}</p>
         </Card>
     );
 }
