@@ -2,6 +2,7 @@ import { CartProvider } from "./context/CartContext";
 import { Navbar } from "./components/layout/Navbar";
 import { MenuList } from "./components/menu/MenuList";
 import { CartSummary } from "./components/cart/CartSummary";
+import { CheckoutForm } from "./components/cart/CheckoutForm";
 
 export default function App() {
     return (
@@ -18,6 +19,7 @@ export default function App() {
                     <aside className="lg:col-span-1">
                         <div className="lg:sticky lg:top-24">
                             <CartSummary />
+                            <CheckoutForm /> 
                         </div>
                     </aside>
                 </div>
