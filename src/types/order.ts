@@ -4,6 +4,7 @@ export type CustomerInfo = {
   name: string;
   table: string | undefined;        // keep as string for easy input; cast to number server-side if needed
   notes?: string;
+  phone?: string;
 };
 
 export type OrderItemPayload = {

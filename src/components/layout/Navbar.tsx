@@ -19,10 +19,11 @@ export function Navbar() {
   // Active link styling helper
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     [
-      "px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200",
+      `rounded px-3 py-2 ${
       isActive
-        ? "bg-indigo-600 text-white"
-        : "text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white",
+        ? "bg-gray-200 dark:bg-gray-700 font-semibold"
+        : "hover:bg-gray-100 dark:hover:bg-gray-800"
+    }`
     ].join(" ");
 
   return (
